@@ -1,11 +1,31 @@
 package com.example.apism6i5.data
 
+import androidx.lifecycle.LiveData
+import com.example.apism6i5.data.local.Item
+import com.example.apism6i5.data.local.ItemDao
 import com.example.apism6i5.data.remote.Terreno
 import com.example.apism6i5.data.remote.TerrenoAPI
 
-class Repositorio(private val terrenoAPI: TerrenoAPI) {
+class Repositorio(private val terrenoAPI: TerrenoAPI, private val itemDao: ItemDao) {
 
+    fun obtenerItems(): LiveData<List<Item>> = itemDao.getAllItems()
 
+    suspend fun cargarTerreno() {
+
+        val respuesta = terrenoAPI.getData()
+
+        if (respuesta.isSuccessful) {
+            val resp = respuesta.body()
+            resp?.let { terrenos ->
+                val item = terrenos.map { it.transformar() }
+                itemDao.insertItemTerrenos(item)
+            }
+        }
+    }
+
+    fun Terreno.transformar(): Item = Item(this.id, this.precio, this.tipo, this.img)
+
+    /*
     suspend fun cargarTerreno(): List<Terreno> {
         val respuesta = terrenoAPI.getData()
         if(respuesta.isSuccessful){
@@ -16,5 +36,7 @@ class Repositorio(private val terrenoAPI: TerrenoAPI) {
         }
         return emptyList()
     }
+
+     */
 
 }
