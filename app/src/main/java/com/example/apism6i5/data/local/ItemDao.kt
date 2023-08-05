@@ -25,4 +25,8 @@ interface ItemDao {
 
     @Query("DELETE FROM tabla_item")
     suspend fun deleteDatos()
+
+    @Query("Select * from tabla_item where id = :id")
+    fun getTerreno(id:String): LiveData<Item>
+
 }
