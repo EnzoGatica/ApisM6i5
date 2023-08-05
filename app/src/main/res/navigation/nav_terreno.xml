@@ -9,5 +9,14 @@
         android:id="@+id/listadoTerrenos"
         android:name="com.example.apism6i5.vistas.ListadoTerrenos"
         android:label="fragment_listado_terrenos"
-        tools:layout="@layout/fragment_listado_terrenos" />
+        tools:layout="@layout/fragment_listado_terrenos" >
+        <action
+            android:id="@+id/action_listadoTerrenos_to_detalle_Fragmento"
+            app:destination="@id/detalle_Fragmento" />
+    </fragment>
+    <fragment
+        android:id="@+id/detalle_Fragmento"
+        android:name="com.example.apism6i5.vistas.Detalle_Fragmento"
+        android:label="fragment_detalle__fragmento"
+        tools:layout="@layout/fragment_detalle__fragmento" />
 </navigation>

@@ -22,7 +22,6 @@ class TerrenoVM(application: Application) : AndroidViewModel(application) {
 
     fun getAllTerrenos() = viewModelScope.launch {
         repositorio.cargarTerreno()
-
     }
 
 }
