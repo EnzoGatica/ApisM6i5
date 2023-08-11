@@ -23,7 +23,6 @@ class Repositorio(private val terrenoAPI: TerrenoAPI, private val itemDao: ItemD
         }
     }
 
-    fun Terreno.transformar(): Item = Item(this.id, this.precio, this.tipo, this.img)
 
     fun obtenerTerrenosConId(id: String): LiveData<Item> = itemDao.getTerreno(id)
 
